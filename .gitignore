@@ -27,3 +27,5 @@ src/**/*.css
 
 #config
 .env
+
+.vscode
