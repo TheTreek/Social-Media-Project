@@ -1,0 +1,69 @@
+@import '../../App';
+
+
+#new-post{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+    #form-container{
+        width: 80%;
+        max-width: $post-width;
+        border: solid black 1px;
+        padding: 30px;
+        form{
+            display: flex;
+            flex-direction: column;
+            .form-label{
+                font-weight: bold;
+            }
+            label{
+                @extend %default-text;
+                margin: 10px;
+            }
+            span{
+                width: 100%;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+            #text{
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin-bottom: 0px;;
+                textarea{
+                    width: 100%;
+                    height: 200px;
+                    resize: none;
+                    @extend %default-text;
+                    font-size: 24px;
+                }
+                #text-info{
+                    @extend %default-text;
+                    text-align: end;
+                }
+            }
+            #btn-container{
+                margin: 0px;
+            }
+            
+        }
+    }
+}
+
+@media (max-width: $tablet){
+    #new-post{
+        #form-container{
+            width: 90%;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile){
+    #new-post{
+        #form-container{
+            width: 95%;
+        }
+    }
+}

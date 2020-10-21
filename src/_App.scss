@@ -1,0 +1,38 @@
+@import 'reset';
+
+// Colors
+$font-family:Arial;
+$green: #74F999;
+// $grey: #C4C4C4;
+$grey: #F8F9FA;
+$font-color: #6B717F;
+
+// Sizing
+$post-width: 800px;
+
+
+//Breakpoints
+$mobile: 500px;
+$tablet: 768px;
+
+%default-text{
+    color: $font-color;
+    font: 100% $font-family;
+}
+
+%heading{
+    font-family: 'Montserrat', sans-serif;
+    font-variant: small-caps;
+    color: $font-color;
+    font-weight: bold;
+}
+
+h1{
+    @extend %heading;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+u{
+    text-decoration: underline;
+}

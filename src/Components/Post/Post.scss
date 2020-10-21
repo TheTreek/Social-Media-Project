@@ -1,0 +1,49 @@
+@import '../../App';
+
+.post-container{
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .post{
+        background-color: $grey;
+        border-radius: 5px;
+        border: solid 1px $font-color;
+        max-width: $post-width;
+        width: 80%;
+        margin-top: 40px;
+        .post-header{
+            display: flex;
+            height: 80px;
+            padding: 10px 30px;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+            @extend %default-text;
+            font-weight: 600;
+            .post-profile{
+               display: flex;
+               align-items: center;
+                img{
+                    width: 60px;
+                    border-radius: 100%;
+                    margin-right: 20px;
+                }
+            }
+        }
+        .post-body{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px 50px 50px 50px;
+            box-sizing: border-box;
+            p{
+                @extend %default-text;
+                font-size: 24px;
+                word-wrap: break-word;
+                width: 100%;
+            }
+        }
+    }
+}
