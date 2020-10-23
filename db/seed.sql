@@ -29,6 +29,7 @@ CREATE TABLE litter_like(
 );
 
 CREATE TABLE litter_comment(
+    id SERIAL PRIMARY KEY,
     post_id INTEGER REFERENCES litter_post(id),
     user_id INTEGER REFERENCES litter_user(id),
     comment VARCHAR(250)

@@ -30,6 +30,9 @@ app.post('/api/login',authCont.login); //Login to account
 //Posts
 app.post('/api/post', authMiddle.loggedIn, postCont.post); //Create post
 app.get('/api/post/:id', postCont.getSingle) //Get single post
+app.get('/api/like/:post_id', authMiddle.loggedIn, postCont.like); //Like a post
+app.get('/api/post/:post_id/comments',postCont.getComments); // Get comments
+app.post('/api/post/:post_id/comment', authMiddle.loggedIn, postCont.postComment); //Post a comment
 
 //Connect to server -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 massive({

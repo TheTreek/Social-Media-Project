@@ -10,7 +10,7 @@
     #form-container{
         width: 80%;
         max-width: $post-width;
-        border: solid black 1px;
+        @include border;
         padding: 30px;
         form{
             display: flex;
@@ -38,6 +38,8 @@
                     resize: none;
                     @extend %default-text;
                     font-size: 24px;
+                    @include border;
+                    background-color: white;
                 }
                 #text-info{
                     @extend %default-text;

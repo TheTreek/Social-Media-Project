@@ -3,27 +3,25 @@ import './Login.css';
 import { connect } from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios'
-import {Helmet} from 'react-helmet';
+import {Helmet} from 'react-helmet-async';
 
 function Login(props){
     let [state, setState] = useState({
         password: '', 
         user_name: '',
     });
-    let [error, setError] = useState(null),
-        [errCode,setErrCode] = useState(null);
+    let [error, setError] = useState(null);
+        // [errCode,setErrCode] = useState(null);
 
     const submitForm = (e)=>{
         axios.post('/api/login',state).then(res=>{
-            console.log(res);
             const {id,user_name,profile_pic,authenticated} = res.data;
             props.getUser(id,user_name,profile_pic,authenticated);
             props.history.push(`/profile/${id}`);
         }).catch(err=>{
-            console.log(err.response.status);
             if(err.response.data){
                 setError(err.response.data);
-                setErrCode(err.response.status);
+                // setErrCode(err.response.status);
             }else
                 setError(err.message)
         });
@@ -34,8 +32,8 @@ function Login(props){
     if(error){
         err = (
         <div id='error'>
-            <img src={`https://http.cat/${errCode}`} alt='cat'/>
-            <span id='err'>Error: </span>&nbsp;{error}
+            {/* <img src={`https://http.cat/${errCode}`} alt='cat'/> */}
+            <span id='err'>Error</span>{error}
         </div>);
     }
     return (

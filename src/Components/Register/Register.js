@@ -3,7 +3,7 @@ import './Register.css';
 import { connect } from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
-import {Helmet} from 'react-helmet';
+import {Helmet} from 'react-helmet-async';
 
 function Register(props){
     let [state, setState] = useState({
@@ -14,15 +14,12 @@ function Register(props){
         user_name: '',
     });
 
-    let [error, setError] = useState(null)
-
-    console.log(props);
+    let [error, setError] = useState(null);
 
     const submitForm = (e)=>{
         setError(null)
         axios.post('/api/register',state).then(res=>{
             setState({email: '',password: '',first_name: '', last_name: '',user_name: '',})
-            console.log(res);
             const {id,user_name,profile_pic,authenticated} = res.data;
             props.getUser(id,user_name,profile_pic,authenticated);
             props.history.push(`/profile/${id}`);

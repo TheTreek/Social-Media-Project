@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
-import Helmet from 'react-helmet';
+import {Helmet} from 'react-helmet-async';
 
 function Header(props){
     const [mm, setMM] = useState(false);
@@ -60,7 +60,7 @@ function Header(props){
         <div id='header-container'>
             <header id='header'>
                 <Helmet>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+                    <script src="https://kit.fontawesome.com/6f23942a28.js" crossorigin="anonymous"></script>
                 </Helmet>
                 <span id='title'>
                     Litter

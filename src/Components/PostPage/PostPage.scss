@@ -1,0 +1,94 @@
+@import '../../App';
+
+.post-container{
+    width: 100%;
+    // min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    > span{
+        width: 80%;
+        display: flex;
+        max-width: $post-width;
+        .back-btn{
+            @include border;
+            @extend %default-text;
+            padding: 6px;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            margin-top: 35px;
+            cursor: pointer;     
+        }
+    }
+    #comment-container{
+        width: 80%;
+        display: flex;
+        max-width: $post-width;
+        margin-top: 20px;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 70px;
+        #comment-form{
+            @include border;
+            @extend %default-text;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-bottom: 10px;
+            label{
+                width: 95%;
+                font-weight: bold;
+                font-size: 18px;
+            }
+            #comment-text{
+                resize: none;
+                width: 95%;
+                @extend %default-text;
+                @include border;
+                background-color: white;
+                font-size: 18px;
+                margin: 10px 0px
+            }
+            #submit-container{
+                width: 95%;
+                display: flex;
+                box-sizing: border-box;
+                justify-content: flex-end;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@media (max-width: $tablet) {
+    .post-container{
+        >span{
+            width: 85%;
+        }
+        #comment-container{
+            width: 85%;
+        }
+    }
+    
+}
+
+@media (max-width: $mobile) {
+    .post-container{
+        >span{
+            width: 95%;
+            
+        }
+        .back-btn{
+            width: 100%;
+        }
+        #comment-container{
+            width: 95%;
+        }
+    }
+    
+}

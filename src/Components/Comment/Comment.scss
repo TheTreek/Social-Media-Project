@@ -1,0 +1,61 @@
+@import '../../App';
+.post-comment{
+    @include border;
+    width: 100%;
+    display: flex;
+    margin: 10px 0px; 
+    flex-direction: row;
+    padding: 10px;
+    box-sizing: border-box;
+    .comment-header{
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        @extend %default-text;
+        font-weight: 600;
+        justify-content: center;
+        padding: 10px;
+        text-decoration: none;
+        .comment-profile-pic{
+            @include border;
+            width: 60px;
+            border-radius: 100%;
+            align-self:center;   
+        }
+        .comment-username{
+            text-align: center;
+        }
+    }
+    .comment-body{
+        @extend %default-text;
+        font-size: 18px;
+        word-wrap: break-word;
+        width: calc(100% - 100px);
+        box-sizing: border-box;
+        p{
+            word-wrap: break-word;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+}
+
+@media (max-width: $tablet){
+    .post-comment{
+        flex-direction: column;
+        .comment-header{
+            flex-direction: row;
+            width: 100%;
+            justify-content: flex-start;
+            padding: 0px 10px;
+            text-decoration: none;
+            .comment-profile-pic{
+                display: none;
+            }
+        }
+        .comment-body{
+            width: 100%;
+        }
+    }
+}

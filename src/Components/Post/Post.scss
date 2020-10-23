@@ -1,49 +1,103 @@
 @import '../../App';
-
-.post-container{
-    width: 100%;
-    min-height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .post{
-        background-color: $grey;
-        border-radius: 5px;
-        border: solid 1px $font-color;
-        max-width: $post-width;
-        width: 80%;
-        margin-top: 40px;
-        .post-header{
-            display: flex;
-            height: 80px;
-            padding: 10px 30px;
-            justify-content: space-between;
-            width: 100%;
-            box-sizing: border-box;
-            @extend %default-text;
-            font-weight: 600;
-            .post-profile{
-               display: flex;
-               align-items: center;
-                img{
-                    width: 60px;
-                    border-radius: 100%;
-                    margin-right: 20px;
-                }
+.post{
+    @include border;
+    max-width: $post-width;
+    width: 80%;
+    margin-top: 40px;
+    .post-header{
+        display: flex;
+        height: 80px;
+        padding: 10px 30px;
+        justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
+        @extend %default-text;
+        font-weight: 600;
+        .post-link{
+            text-decoration: none;;
+        }
+        .post-profile{
+           display: flex;
+           align-items: center;
+            img{
+                width: 60px;
+                border-radius: 100%;
+                margin-right: 20px;
+                border-radius: 100%;
+                align-self:center;
+                border: solid 1px black;
+                border-color: rgba(0,0,0,0.2);
+            }
+            .post-username{
+                @extend %default-text;
+                font-weight: 600;
             }
         }
-        .post-body{
+    }
+    .post-body{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 40px 50px 50px 50px;
+        box-sizing: border-box;
+        p{
+            @extend %default-text;
+            font-size: 24px;
+            word-wrap: break-word;
             width: 100%;
+        }
+    }
+    .post-footer{
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
+        font-size: 20px;
+        .post-likes{
+            padding: 0px 20px;
             display: flex;
-            flex-wrap: wrap;
-            padding: 40px 50px 50px 50px;
-            box-sizing: border-box;
-            p{
-                @extend %default-text;
-                font-size: 24px;
-                word-wrap: break-word;
-                width: 100%;
+            align-items: center;
+            .like-btn{
+                cursor: pointer;
             }
+        }
+        .post-comments{
+            padding: 0px 15px 0px 0px;
+            display: flex;
+            align-items: center;
+        }
+        .count{
+            @extend %default-text;
+            font-size: 16px;
+            padding: 0px 4px;
+        }
+    }
+}
+
+.err-cont{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .error{
+        @extend %error;
+    }
+}
+
+@media (max-width: $tablet) {
+    .post{
+        width: 85%;
+        .post-body{
+            padding: 20px;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .post{
+        width: 95%;
+        .post-body{
+            padding: 15px;
         }
     }
 }

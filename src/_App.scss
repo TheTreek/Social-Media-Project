@@ -1,11 +1,11 @@
-@import 'reset';
-
 // Colors
 $font-family:Arial;
 $green: #74F999;
 // $grey: #C4C4C4;
 $grey: #F8F9FA;
 $font-color: #6B717F;
+$err-back: pink;
+$err-border: red;
 
 // Sizing
 $post-width: 800px;
@@ -25,6 +25,37 @@ $tablet: 768px;
     font-variant: small-caps;
     color: $font-color;
     font-weight: bold;
+}
+
+@mixin border{
+    background-color: $grey;
+    border-radius: 5px;
+    border: solid 1px $font-color;
+    border-color: rgba(0,0,0,0.2);
+}
+
+%error{
+    @extend %default-text;
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: solid 1px red;
+    background-color: pink;
+    flex-direction: column;
+    #err{
+        font-weight: bold;
+    }
+    .err{
+        font-weight: bold;
+    }
+    img{
+        max-width: 400px;
+    }
 }
 
 h1{

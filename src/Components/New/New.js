@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './New.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {Helmet} from 'react-helmet-async';
 
 function New(props){
     const [text, setText] = useState(''),
@@ -12,9 +13,10 @@ function New(props){
         if(!props.id){
             props.history.push('/');
         }
-    });
+    },[props.id, props.history]);
 
     const submit = (e)=>{
+        setType('text');
         axios.post('/api/post',{type: type, content: text})
             .then(res=>{
                 const id = res.data.id;
@@ -28,6 +30,9 @@ function New(props){
 
     return (
         <div id='new-post'>
+            <Helmet>
+                <title>Litter | New Post</title>
+            </Helmet>
             <div id='form-container'>
                 <h1>New Post</h1>
                 

@@ -25,14 +25,13 @@
         }
     }
     form{
-        border-radius: 20px;
+        @include border;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
         width: 80%;
         max-width: 600px;
-        background-color: $grey;
         @extend %default-text;
         span{
             width: 100%;

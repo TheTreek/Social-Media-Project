@@ -8,35 +8,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    #error{
-        width: 80%;
-        max-width: 600px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 30px;
-        margin-bottom: 10px;
-        border-radius: 20px;
-        border: solid 1px red;
-        background-color: pink;
-        flex-direction: column;
-        @extend %default-text;
-        #err{
-            font-weight: bold;
-        }
-        img{
-            max-width: 400px;
-        }
+    #error{ 
+        @extend %error; 
     }
     form{
-        border-radius: 20px;
+        @include border;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
         width: 80%;
         max-width: 600px;
-        background-color: $grey;
         @extend %default-text;
         span{
             width: 100%;

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <HashRouter>
       <Provider store={store}>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </Provider>
     </HashRouter>
   </React.StrictMode>,
