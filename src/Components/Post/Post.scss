@@ -14,7 +14,7 @@
         @extend %default-text;
         font-weight: 600;
         .post-link{
-            text-decoration: none;;
+            text-decoration: none;
         }
         .post-profile{
            display: flex;
@@ -40,6 +40,10 @@
         flex-wrap: wrap;
         padding: 40px 50px 50px 50px;
         box-sizing: border-box;
+        .post-body-link{
+            text-decoration: none;
+            width: 100%;
+        }
         p{
             @extend %default-text;
             font-size: 24px;
@@ -66,6 +70,9 @@
             padding: 0px 15px 0px 0px;
             display: flex;
             align-items: center;
+            .post-comment-link{
+                color: black;
+            }
         }
         .count{
             @extend %default-text;

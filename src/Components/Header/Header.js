@@ -29,6 +29,7 @@ function Header(props){
         <nav>
             <Link to='/login' className='nav-link'>Login</Link>
             <Link to='/register' className='nav-link'>Register</Link>
+            <Link to='/search' className='nav-link'>Search</Link>
         </nav>
     );
 
@@ -36,6 +37,7 @@ function Header(props){
         <nav style={mmStyle}>
             <Link onClick={e=>setMM(!mm)}  to='/login' className='nav-link mobile-links'>Login</Link>
             <Link onClick={e=>setMM(!mm)}  to='/register' className='nav-link mobile-links' >Register</Link>
+            <Link onClick={e=>setMM(!mm)} to={'/search'} className='nav-link mobile-links'>Search</Link>
         </nav>
     );
     
@@ -44,6 +46,7 @@ function Header(props){
             <nav>
                 <Link to='/' className='nav-link'>Home</Link>
                 <Link to={`/profile/${props.id}`} className='nav-link'>Profile</Link>
+                <Link to='/search' className='nav-link'>Search</Link>
                 <Link to='/new' className='nav-link'>New</Link>
             </nav>
         );
@@ -51,6 +54,7 @@ function Header(props){
             <nav style={mmStyle}>
                 <Link onClick={e=>setMM(!mm)} to='/' className='nav-link mobile-links'>Home</Link>
                 <Link onClick={e=>setMM(!mm)} to={`/profile/${props.id}`} className='nav-link mobile-links'>Profile</Link>
+                <Link onClick={e=>setMM(!mm)} to={'/search'} className='nav-link mobile-links'>Search</Link>
                 <Link onClick={e=>setMM(!mm)} to='/new' className='nav-link mobile-links'>New</Link>
             </nav>
         );

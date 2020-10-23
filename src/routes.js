@@ -6,6 +6,7 @@ import Profile from './Components/Profile/Profile';
 import New from './Components/New/New';
 import Register from './Components/Register/Register';
 import PostPage from './Components/PostPage/PostPage';
+import Search from './Components/Search/Search';
 
 
 export default (
@@ -16,5 +17,7 @@ export default (
         <Route path='/profile/:id' component={Profile}/>
         <Route path='/post/:id' component={PostPage}/>
         <Route path='/new' component={New}/>
+        <Route path='/search/:query' component={Search}/>
+        <Route path='/search' component={Search}/>
     </Switch>
 )

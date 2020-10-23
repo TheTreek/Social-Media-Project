@@ -1,3 +1,5 @@
+const { query } = require("express");
+
 module.exports = {
     post: async (req,res)=>{
         let {type, content} = req.body;
@@ -52,7 +54,7 @@ module.exports = {
         const comments = await db.get_comments({post_id});
         return res.status(200).send(comments);
     },
-    postComment: async(req,res)=>{
+    postComment: async (req,res)=>{
         const db = req.app.get('db');
         const {post_id} = req.params;
         const user_id = req.session.user.id;
@@ -62,7 +64,16 @@ module.exports = {
         
         await db.post_comment({post_id,user_id,comment});
         return res.sendStatus(200);
-        
-        
+    },
+    search: async(req,res)=>{
+        let {query,limit,offset} = req.params;
+        if(!query)
+            query = '';
+        const body = {query,limit,offset};
+        const db = req.app.get('db');
+
+        const posts = await db.search(body);
+
+        return res.status(200).send(posts);
     }
 }

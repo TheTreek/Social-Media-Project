@@ -88,7 +88,8 @@ const Post = (props)=>{
                 <span className='post-date'>{formattedDate}</span>
             </span>
             <span className='post-body'>
-                <p>{data.content}</p>
+            {(!props.page) ? <Link to={`/post/${props.id}`} className='post-body-link'><p>{data.content}</p></Link> : <p>{data.content}</p>}
+                
             </span>
             <span className='post-footer'>
                 <span className='post-likes'>
@@ -97,7 +98,7 @@ const Post = (props)=>{
                 </span>
                 <span className='post-comments'>
                     <span className='count'>{data.comments}</span>
-                    <i className="far fa-comment-alt"></i>
+                    {(!props.page) ? <Link to={`/post/${props.id}`} className='post-comment-link'><i className="far fa-comment-alt"></i></Link> : <i className="far fa-comment-alt"></i>}
                 </span>
             </span>
             {err}

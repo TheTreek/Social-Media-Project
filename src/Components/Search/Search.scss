@@ -1,0 +1,27 @@
+@import '../../App';
+
+#search-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    #posts-flex{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 40px;
+    }
+    #load-more{
+        @include border;
+        @extend %default-text;
+        cursor: pointer;
+        padding: 10px 20px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        &:active{
+            color: $grey;
+            background-color: $font-color;
+        }
+    }
+}

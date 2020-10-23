@@ -34,6 +34,9 @@ app.get('/api/like/:post_id', authMiddle.loggedIn, postCont.like); //Like a post
 app.get('/api/post/:post_id/comments',postCont.getComments); // Get comments
 app.post('/api/post/:post_id/comment', authMiddle.loggedIn, postCont.postComment); //Post a comment
 
+//Search
+app.get('/api/search/:query/:limit/:offset', postCont.search); //Search for posts
+app.get('/api/search/:limit/:offset', postCont.search); //search for all posts
 //Connect to server -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 massive({
     connectionString: CONNECTION_STRING,
