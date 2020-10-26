@@ -5,13 +5,12 @@ import './Search.css';
 
 const Search = (props)=>{
     const [posts, setPosts] = useState([]);
-    const [newPosts, setNewPosts] = useState(0);
-    const offset = posts.length;
     const [count, setCount] = useState(8);
     const [length, setLength] = useState(0);
+    const [loads, setLoads] = useState(0);
+    const offset = posts.length;
     const fullPages = Math.floor(length/offset)-1;
     const remainder = length%offset;
-    const [loads, setLoads] = useState(0);
 
     //Get initial posts
     useEffect(()=>{
@@ -24,13 +23,12 @@ const Search = (props)=>{
                     setLength(val.posts);
                     return <Post id={val.id} key={i}/>
                 }));
-                setNewPosts(res.data.length);
             }).catch(err=>{
                 console.log(err);
             })
     },[props.match.params.query]);
 
-
+    //Load more posts (Pagination)
     const loadMore = ()=>{
         if(loads === fullPages)
             setCount(remainder);
@@ -44,14 +42,12 @@ const Search = (props)=>{
                     return <Post id={val.id} key={offset+i}/>
                 })
                  setPosts([...posts].concat(dataPosts));
-                 setNewPosts(res.data.length);
             }).catch(err=>{
                 console.log(err);
             });
     }
 
     let loadMoreBtn = null;
-
     if(posts.length < length){   
             loadMoreBtn = (
                 <div id='load-more' onClick={loadMore}>

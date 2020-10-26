@@ -72,6 +72,20 @@ const Post = (props)=>{
         return err;
     }
 
+    const imagePost = (
+        <img src={data.content} alt={`post from ${data.user_name}`} className='content-img'/>
+    )
+
+    const textPost = (
+        <p>{data.content}</p>
+    )
+
+    let postBody = textPost;
+    if(data.type === 'img'){
+        postBody = imagePost;
+    };
+
+
     return(
         <div className='post'>
             <Helmet>
@@ -88,7 +102,7 @@ const Post = (props)=>{
                 <span className='post-date'>{formattedDate}</span>
             </span>
             <span className='post-body'>
-            {(!props.page) ? <Link to={`/post/${props.id}`} className='post-body-link'><p>{data.content}</p></Link> : <p>{data.content}</p>}
+    {(!props.page) ? <Link to={`/post/${props.id}`} className='post-body-link'>{postBody}</Link> : postBody}
                 
             </span>
             <span className='post-footer'>

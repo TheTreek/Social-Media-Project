@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express'),
+multer = require('multer'),
+upload = multer({})
 massive = require('massive'),
 session = require('express-session'),
 {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
@@ -9,6 +11,8 @@ postCont = require('./controllers/post');
 authMiddle = require('./middleware/auth');
 
 app.use(express.json());
+
+
 
 //Set up sessions -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 app.use(session({
@@ -28,7 +32,7 @@ app.get('/api/logout', authCont.logout); //Delete session of user
 app.post('/api/login',authCont.login); //Login to account
 
 //Posts
-app.post('/api/post', authMiddle.loggedIn, postCont.post); //Create post
+app.post('/api/post', upload.single('image'), authMiddle.loggedIn, postCont.post); //Create post
 app.get('/api/post/:id', postCont.getSingle) //Get single post
 app.get('/api/like/:post_id', authMiddle.loggedIn, postCont.like); //Like a post
 app.get('/api/post/:post_id/comments',postCont.getComments); // Get comments
