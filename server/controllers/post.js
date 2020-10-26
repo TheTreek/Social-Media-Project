@@ -1,9 +1,7 @@
 const {Buffer} = require('buffer');
 var AWS = require('aws-sdk');
-const { resolve } = require('path');
 const {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
 const imagemin = require('imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 AWS.config.update({
     accessKeyId: AWS_ACCESS_KEY_ID,
