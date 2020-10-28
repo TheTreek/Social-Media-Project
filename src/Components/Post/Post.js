@@ -25,7 +25,7 @@ const Post = (props)=>{
                 }else
                     setError(err.message)
             });
-        },[props.num,props.refresh]);
+        },[props.num,props.refresh, props.id]);
 
     let date = moment(data.date);
     date.subtract(6,'hours');

@@ -123,10 +123,14 @@ module.exports = {
         let {query,limit,offset} = req.params;
         if(!query)
             query = '';
+        query = query.replace(' ', ' & ');
         const body = {query,limit,offset};
         const db = req.app.get('db');
-
-        const posts = await db.search(body);
+        let posts = [];
+        if(query.length === 0)
+            posts = await db.search_all(body);
+        else
+            posts = await db.search(body);
 
         return res.status(200).send(posts);
     }

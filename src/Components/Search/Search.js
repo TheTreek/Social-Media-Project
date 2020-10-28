@@ -24,16 +24,16 @@ const Search = (props)=>{
             url = `/api/search/${props.match.params.query}/${count}/0`;
         axios.get(url)
             .then(res=>{
-                setPosts(res.data);
-                setLength(res.data[0].posts);
+                if(res.data[0]){
+                    setLength(res.data[0].posts);
+                }setPosts(res.data);
             }).catch(err=>{
                 console.log(err);
             })
-    },[props.match.params.query]);
+    },[props.match.params.query,count]);
 
     //Load more posts (Pagination)
     const loadMore = ()=>{
-        reload();
         if(loads === fullPages)
             setCount(remainder);
         setLoads(loads+1);
@@ -42,7 +42,8 @@ const Search = (props)=>{
             url = `/api/search/${props.match.params.query}/${count}/${offset}`;
         axios.get(url)
             .then(res=>{
-                 setPosts([...posts].concat(res.data));
+                if(res.data[0])
+                    setPosts([...posts].concat(res.data));
             }).catch(err=>{
                 console.log(err);
             });
