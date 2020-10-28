@@ -25,14 +25,15 @@ const Post = (props)=>{
                 }else
                     setError(err.message)
             });
-        },[props.num,props.id]);
-    
+        },[props.num,props.refresh]);
+
     let date = moment(data.date);
     date.subtract(6,'hours');
     date.local();
     const formattedDate = date.format('MM/DD/YYYY h:mm a')
     
     const like = ()=>{
+        setData({...data, liked: !data.liked});
         axios.get(`/api/like/${data.post_id}`)
             .then(res=>{
                 setData(res.data);
@@ -86,6 +87,30 @@ const Post = (props)=>{
     };
 
 
+    const follow = ()=>{
+        axios.put(`/api/follow/${data.id}`)
+            .then(res=>{
+                setData({...data, following: res.data.count});
+                if(props.reload)
+                    props.reload();
+            }).catch(err=>{
+                if(err.response.data && err.response.status && err.response){
+                    setError(err.response.data);
+                }else
+                    setError(err.message)
+            })
+    }
+
+    let followButton = (
+        <div onClick={follow} className='post-follow-button'>Follow</div>
+    );
+
+    if(data.following && data.following === '1'){
+    followButton = (
+        <div onClick={follow} className='post-follow-button-followed'>Following</div>
+    )
+    }
+
     return(
         <div className='post'>
             <Helmet>
@@ -99,7 +124,7 @@ const Post = (props)=>{
                         <span className='post-username'>{data.user_name}</span>
                     </span>
                 </Link>
-                <span className='post-date'>{formattedDate}</span>
+                <span className='post-date'><p>{formattedDate}</p>{followButton}</span>
             </span>
             <span className='post-body'>
     {(!props.page) ? <Link to={`/post/${props.id}`} className='post-body-link'>{postBody}</Link> : postBody}

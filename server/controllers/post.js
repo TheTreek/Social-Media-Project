@@ -49,7 +49,6 @@ module.exports = {
                 content = content.substring(0,250);
         }
         if(type === 'img'){
-            console.log(req.files, req.file)
             if(!req.file)
                 return res.status(400).send('No file was uploaded');
             const currentTime = new Date().getTime();
@@ -59,7 +58,6 @@ module.exports = {
                     imageminMozjpeg({quality: 75})
                 ]
             });
-            console.log(buff);
             await getImageUrl(url, buff.toString('base64'));
             content = 'https://litter.s3-us-west-2.amazonaws.com/' + url;
         }

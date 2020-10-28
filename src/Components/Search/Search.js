@@ -11,6 +11,11 @@ const Search = (props)=>{
     const offset = posts.length;
     const fullPages = Math.floor(length/offset)-1;
     const remainder = length%offset;
+    let [refresh, setRefresh] = useState(0);
+
+    function reload (){
+        setRefresh(refresh+1);
+    }
 
     //Get initial posts
     useEffect(()=>{
@@ -19,10 +24,8 @@ const Search = (props)=>{
             url = `/api/search/${props.match.params.query}/${count}/0`;
         axios.get(url)
             .then(res=>{
-                setPosts(res.data.map((val,i)=>{
-                    setLength(val.posts);
-                    return <Post id={val.id} key={i}/>
-                }));
+                setPosts(res.data);
+                setLength(res.data[0].posts);
             }).catch(err=>{
                 console.log(err);
             })
@@ -30,6 +33,7 @@ const Search = (props)=>{
 
     //Load more posts (Pagination)
     const loadMore = ()=>{
+        reload();
         if(loads === fullPages)
             setCount(remainder);
         setLoads(loads+1);
@@ -38,17 +42,14 @@ const Search = (props)=>{
             url = `/api/search/${props.match.params.query}/${count}/${offset}`;
         axios.get(url)
             .then(res=>{
-                const dataPosts = res.data.map((val, i)=>{
-                    return <Post id={val.id} key={offset+i}/>
-                })
-                 setPosts([...posts].concat(dataPosts));
+                 setPosts([...posts].concat(res.data));
             }).catch(err=>{
                 console.log(err);
             });
     }
 
     let loadMoreBtn = null;
-    if(posts.length < length){   
+    if(posts.length < length && posts.length !== 0){   
             loadMoreBtn = (
                 <div id='load-more' onClick={loadMore}>
                     Load More
@@ -56,10 +57,20 @@ const Search = (props)=>{
             )
     }
 
+    const search = (e)=>{
+        e.preventDefault();
+        props.history.push(`/search/${searchText}`);
+    }
+    const [searchText, setSearch] = useState('');
+
     return (
         <div id='search-container'>
             <div id='posts-flex'>
-                {posts}
+                <form id='search-bar' onSubmit={search}>
+                    <input type='text' value={searchText} onChange={e=>setSearch(e.target.value)} id='search-input' placeholder='Search...'/>
+                    <input type='submit' value='Search' id='search-button'/>
+                </form>
+                {posts.map((val,i)=>{return <Post id={val.id} key={(i).toString()} refresh={refresh} reload={reload}/>})}
             </div>
             {loadMoreBtn}
         </div>

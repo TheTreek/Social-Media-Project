@@ -6,13 +6,12 @@ massive = require('massive'),
 session = require('express-session'),
 {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
 app = express(),
-authCont = require('./controllers/auth');
-postCont = require('./controllers/post');
+authCont = require('./controllers/auth'),
+postCont = require('./controllers/post'),
+profCont = require('./controllers/profile'),
 authMiddle = require('./middleware/auth');
 
 app.use(express.json());
-
-
 
 //Set up sessions -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 app.use(session({
@@ -41,6 +40,10 @@ app.post('/api/post/:post_id/comment', authMiddle.loggedIn, postCont.postComment
 //Search
 app.get('/api/search/:query/:limit/:offset', postCont.search); //Search for posts
 app.get('/api/search/:limit/:offset', postCont.search); //search for all posts
+
+//Profile
+app.put('/api/follow/:user_id', authMiddle.loggedIn, profCont.follow); //Follow a user
+
 //Connect to server -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 massive({
     connectionString: CONNECTION_STRING,

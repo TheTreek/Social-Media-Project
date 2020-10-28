@@ -45,7 +45,7 @@ function PostPage(props){
         commentForm = (
             <form id='comment-form' onSubmit={postComment}>
                     {/* <label htmlFor='comment'>Write a comment:</label> */}
-                    <textarea value={form} onChange={(e)=>setForm(e.target.value)} maxLength="125" name='comment' id='comment-text' placeholder='Write a comment...'></textarea>
+                    <textarea value={form} onChange={(e)=>setForm(e.target.value)} maxLength="125" name='comment' id='comment-text' placeholder='Write a comment...' required></textarea>
                     <span id='submit-container'>
                         <span id='comment-length'>{form.length} / 125 &nbsp;</span>
                         <input type='submit' value='Submit'/>

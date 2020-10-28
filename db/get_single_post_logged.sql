@@ -15,7 +15,11 @@ SELECT
     (SELECT COUNT(*) 
         FROM litter_like
         WHERE post_id = p.id AND user_id = ${user_id}
-    ) as liked
+    ) as liked,
+    (SELECT COUNT(*)
+        FROM litter_followers
+        WHERE user_id = u.id AND follower_id = ${user_id}
+    ) as following
 FROM litter_post p
 JOIN litter_user u ON p.user_id = u.id
 WHERE p.id = ${id}
