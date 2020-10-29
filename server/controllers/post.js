@@ -123,7 +123,14 @@ module.exports = {
         let {query,limit,offset} = req.params;
         if(!query)
             query = '';
-        query = query.replace(' ', ' & ');
+        query = decodeURI(decodeURIComponent(query));
+        while(query[0] === ' ' || query[query.length-1] === ' '){
+            if(query[0] === ' ')
+                query = query.slice(1);
+            if(query[query.length-1] === ' ')
+                query = query.slice(0,-1);
+        }
+        query = query.replace(/ /gi, ' & ');
         const body = {query,limit,offset};
         const db = req.app.get('db');
         let posts = [];
@@ -133,5 +140,11 @@ module.exports = {
             posts = await db.search(body);
 
         return res.status(200).send(posts);
+    },
+    getComment: async(req,res)=>{
+        const {id} = req.params;
+        const db = req.app.get('db');
+        const comment = await db.get_single_comment({id});
+        return res.status(200).send(comment[0]);
     }
 }

@@ -35,6 +35,7 @@ app.post('/api/post', upload.single('image'), authMiddle.loggedIn, postCont.post
 app.get('/api/post/:id', postCont.getSingle) //Get single post
 app.get('/api/like/:post_id', authMiddle.loggedIn, postCont.like); //Like a post
 app.get('/api/post/:post_id/comments',postCont.getComments); // Get comments
+app.get('/api/comment/:id', postCont.getComment) //Get single comment
 app.post('/api/post/:post_id/comment', authMiddle.loggedIn, postCont.postComment); //Post a comment
 
 //Search
@@ -43,6 +44,8 @@ app.get('/api/search/:limit/:offset', postCont.search); //search for all posts
 
 //Profile
 app.put('/api/follow/:user_id', authMiddle.loggedIn, profCont.follow); //Follow a user
+app.get('/api/profile/:id', profCont.getProfile); //Get profile
+app.get('/api/profile/:id/:type', profCont.getContent) //Get content
 
 //Connect to server -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 massive({

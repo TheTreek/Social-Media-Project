@@ -12,19 +12,27 @@ const Post = (props)=>{
 
     //Get post info
     useEffect(()=>{
+        const source = axios.CancelToken.source();
+        let isMounted = true;
         setNoPage(false);
         setError(false);
-        axios.get(`/api/post/${props.id}`)
+        axios.get(`/api/post/${props.id}`,{cancelToken: source.token})
             .then(res=>{
                 setData(res.data);
             }).catch(err=>{
-                if(err.response.data && err.response.status && err.response){
+                if(err.response && err.response.data && err.response.status){
                     setError(err.response.data);
                     setNoPage(true);
                     // setErrCode(err.response.status);
-                }else
+                }else if(isMounted)
                     setError(err.message)
+                else
+                    ;
             });
+        return () =>{
+            source.cancel('Operation canceled by user.');
+            isMounted = false;
+        }
         },[props.num,props.refresh, props.id]);
 
     let date = moment(data.date);
@@ -32,7 +40,8 @@ const Post = (props)=>{
     date.local();
     const formattedDate = date.format('MM/DD/YYYY h:mm a')
     
-    const like = ()=>{
+    const like = (e)=>{
+        e.preventDefault();
         setData({...data, liked: !data.liked});
         axios.get(`/api/like/${data.post_id}`)
             .then(res=>{
@@ -87,7 +96,8 @@ const Post = (props)=>{
     };
 
 
-    const follow = ()=>{
+    const follow = (e)=>{
+        e.preventDefault();
         axios.put(`/api/follow/${data.id}`)
             .then(res=>{
                 setData({...data, following: res.data.count});
@@ -115,7 +125,6 @@ const Post = (props)=>{
         <div className='post'>
             <Helmet>
                 {title}
-                <script src="https://kit.fontawesome.com/6f23942a28.js" crossorigin="anonymous"></script>
             </Helmet>
             <span className='post-header'>
                 <Link to={`/profile/${data.id}`} className='post-link'>

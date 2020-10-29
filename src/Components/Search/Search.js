@@ -68,7 +68,7 @@ const Search = (props)=>{
         <div id='search-container'>
             <div id='posts-flex'>
                 <form id='search-bar' onSubmit={search}>
-                    <input type='text' value={searchText} onChange={e=>setSearch(e.target.value)} id='search-input' placeholder='Search...'/>
+                    <input type='text' value={decodeURIComponent(decodeURI(searchText))} onChange={e=>setSearch(encodeURI(encodeURIComponent(e.target.value)))} id='search-input' placeholder='Search...'/>
                     <input type='submit' value='Search' id='search-button'/>
                 </form>
                 {posts.map((val,i)=>{return <Post id={val.id} key={(i).toString()} refresh={refresh} reload={reload}/>})}

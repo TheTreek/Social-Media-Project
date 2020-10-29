@@ -1,0 +1,189 @@
+@import '../../App';
+
+#profile-container{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    #profile-header{
+        width: 80%;
+        max-width: $post-width;
+        @include border;
+        margin-top: 40px;
+        display: flex;
+        padding: 25px 0px;
+        box-sizing: border-box;
+        #profile-picture{
+            display: flex;
+            flex-direction: column;
+            padding: 10px 15px;
+            @include border;
+            border-width: 0px 1px 0px 0px;
+            border-radius: 0px;
+            #profile-username{
+                text-align: center;
+                font-size: 1em;
+                word-wrap: break-word;
+                word-break: break-all;
+            }
+            img{   
+                @include border;
+                border-radius: 100%;
+                max-width: 120px;
+                max-height: 120px;
+                width: 120px;
+                height: 120px;
+                background-image: url(https://litter.s3-us-west-2.amazonaws.com/defaults/default-user.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+
+            }
+        }
+        #header-info{
+            padding: 10px;
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            box-sizing: border-box;
+            @extend %default-text;
+            #full-name{
+                font-size: 25px;
+            }
+            #header-bio{
+                p{
+                    min-height: 123px;
+                    padding: 10px 0px;
+                    box-sizing: border-box;
+                }
+            }
+            #header-stats{
+                display: flex;
+                justify-content: space-around;
+                .count-box{
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    width: 25%;
+                    .count-title{
+                        font-weight: 600;
+                        margin-bottom: 4px;;
+                    }
+                }
+            }
+        }
+    }
+    #profile-menu{
+        width: 80%;
+        max-width: $post-width;
+        @include border;
+        margin-top: 10px;
+        height: 30px;
+        display: flex;
+        justify-content: space-around;
+        .menu-btn{
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @extend %default-text;
+            &.selected{
+                font-weight: 600;
+            }
+            cursor: pointer;
+        }
+    }
+    #content-container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .post-comment{
+            width: 80%;
+            max-width: $post-width;
+        }
+        .links{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .post-links{
+            width: 80%;
+            max-width: $post-width;
+            text-decoration: none;
+            color: black;
+            cursor: default;
+            .post{
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media (max-width: $tablet){
+    #profile-container{
+        #profile-header{
+            width: 90%;
+            margin-top: 20px;
+            padding: 5px;
+            #profile-picture{
+                padding: 10px;
+                img{
+                    width: 90px;
+                    height: 90px;
+                }
+            }
+            #header-info{
+                padding: 10px;
+            }
+        }
+        #profile-menu{
+            width: 90%;
+        }
+        #content-container{
+            .post-comment{
+                width: 90%;
+            }
+            .post-links{
+                width: 90%;
+            }
+        }
+    }
+}
+
+@media (max-width: $mobile){
+    #profile-container{
+        #profile-header{
+            width: 95%;
+            margin-top: 10px;
+            flex-direction: column;
+            #profile-picture{
+                align-items: center;
+                border: none;
+            }
+        }
+        #header-info{
+            #full-name{
+                text-align: center;
+            }
+            #header-bio p{
+                text-align: center;
+            }
+        }
+        #profile-menu{
+            width: 95%;
+        }
+        #content-container{
+            .post-comment{
+                width: 95%;
+            }
+            .post-links{
+                width: 95%;
+            }
+        }
+        
+    } 
+}
