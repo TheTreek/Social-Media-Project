@@ -17,8 +17,6 @@ const Search = (props)=>{
         setRefresh(refresh+1);
     }
 
-    console.log(count,offset, length, fullPages,remainder)
-    console.log(posts);
     //Get initial posts
     useEffect(()=>{
         let url=`/api/search/${count}/0`;
