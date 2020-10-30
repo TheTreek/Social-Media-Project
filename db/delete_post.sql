@@ -1,0 +1,1 @@
+DELETE FROM litter_post WHERE id = ${id};

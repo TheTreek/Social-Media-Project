@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Post.css';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import moment from 'moment';
 import axios from 'axios';
@@ -9,7 +10,6 @@ const Post = (props)=>{
 
     const [data,setData] = useState({});
     const [noPage, setNoPage] = useState(false);
-
     //Get post info
     useEffect(()=>{
         const source = axios.CancelToken.source();
@@ -48,7 +48,7 @@ const Post = (props)=>{
             .then(res=>{
                 setData(res.data);
             }).catch(err=>{
-                if(err.response.data && err.response.status && err.response){
+                if(err.response && err.response.data && err.response.status){
                     setError(err.response.data);
                     // setErrCode(err.response.status);
                 }else
@@ -123,6 +123,30 @@ const Post = (props)=>{
     )
     }
 
+    const deleteFunc = (e)=>{
+        e.stopPropagation();
+        e.preventDefault();
+        axios.delete(`/api/post/${props.id}`)
+            .then(res=>{
+                if(props.page){
+                    props.history.goBack();
+                }else{
+                    props.reload();
+                }
+            }).catch(err=>{
+                if(err.response.data && err.response.status && err.response){
+                    setError(err.response.data);
+                }else
+                    setError(err.message)
+            })
+    }
+
+    const deleteIcon = (
+        <span className='delete'>
+            <i className='fas fa-trash-alt' onClick={deleteFunc}></i>
+        </span>
+    );
+
     return(
         <div className='post'>
             <Helmet>
@@ -138,10 +162,10 @@ const Post = (props)=>{
                 <span className='post-date'><p>{formattedDate}</p>{followButton}</span>
             </span>
             <span className='post-body'>
-    {(!props.page) ? <Link to={`/post/${props.id}`} className='post-body-link'>{postBody}</Link> : postBody}
-                
+    {(!props.page) ? <Link to={`/post/${props.id}`} className='post-body-link'>{postBody}</Link> : postBody}         
             </span>
             <span className='post-footer'>
+                {(props.user.user_id === data.id) ? deleteIcon : null}
                 <span className='post-likes'>
                     <span className='count'>{data.likes}</span>
                     {data.liked === '1' ? <i className='fas fa-heart like-btn' onClick={like}></i> : <i className='far fa-heart like-btn' onClick={like}></i>}
@@ -156,4 +180,11 @@ const Post = (props)=>{
     );
 }
 
-export default Post;
+const mapStateToProps = reduxState => {
+    return {
+        user: {
+            user_id: reduxState.id
+        }
+    };
+};
+export default withRouter(connect(mapStateToProps)(Post));

@@ -39,6 +39,14 @@ const getImageUrl = async(type,base64Image) => {
     return imageUpload(`${type}`, buffer);
 }
 
+const s3delete = function (str) {
+    const params = {Bucket: 'litter', Key:str.replace('https://litter.s3-us-west-2.amazonaws.com/','')};
+    s3Bucket.deleteObject(params, (err,data)=>{
+        if(err)
+            console.log(err, err.stack);
+    });
+}
+
 
 module.exports = {
     post: async (req,res)=>{
@@ -146,5 +154,18 @@ module.exports = {
         const db = req.app.get('db');
         const comment = await db.get_single_comment({id});
         return res.status(200).send(comment[0]);
+    },
+    delete: async(req,res)=>{
+        const {id} = req.params;
+        const db = req.app.get('db');
+        const post = await db.get_single_post({id});
+        if(req.session.user.id === post[0].id){
+            if(post[0].type === 'img')
+                s3delete(post[0].content);
+            await db.delete_post({id});
+            return res.sendStatus(200);
+        }else{
+            return res.status(401).send('Must be original user to do that');
+        }
     }
 }

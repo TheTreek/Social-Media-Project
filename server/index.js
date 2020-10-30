@@ -38,6 +38,7 @@ app.get('/api/like/:post_id', authMiddle.loggedIn, postCont.like); //Like a post
 app.get('/api/post/:post_id/comments',postCont.getComments); // Get comments
 app.get('/api/comment/:id', postCont.getComment) //Get single comment
 app.post('/api/post/:post_id/comment', authMiddle.loggedIn, postCont.postComment); //Post a comment
+app.delete('/api/post/:id', authMiddle.loggedIn, postCont.delete) //delete a post;
 
 //Search
 app.get('/api/search/:query/:limit/:offset', postCont.search); //Search for posts
