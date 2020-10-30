@@ -9,7 +9,7 @@ const Search = (props)=>{
     const [length, setLength] = useState(0);
     const [loads, setLoads] = useState(0);
     const offset = posts.length;
-    const fullPages = Math.floor(length/offset)-1;
+    const fullPages = Math.floor(length/count)-1;
     const remainder = length%offset;
     let [refresh, setRefresh] = useState(0);
 
@@ -17,6 +17,8 @@ const Search = (props)=>{
         setRefresh(refresh+1);
     }
 
+    console.log(count,offset, length, fullPages,remainder)
+    console.log(posts);
     //Get initial posts
     useEffect(()=>{
         let url=`/api/search/${count}/0`;
@@ -30,7 +32,8 @@ const Search = (props)=>{
             }).catch(err=>{
                 console.log(err);
             })
-    },[props.match.params.query,count]);
+    // eslint-disable-next-line
+    },[props.match.params.query]);
 
     //Load more posts (Pagination)
     const loadMore = ()=>{
