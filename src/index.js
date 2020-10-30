@@ -4,20 +4,22 @@ import {HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {HashRouter} from 'react-router-dom';
+import {BrowserRouter, HashRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from '../src/redux/store';
+
+const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter;
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter>
+    <Router>
       <Provider store={store}>
         <HelmetProvider>
           <App />
         </HelmetProvider>
       </Provider>
-    </HashRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

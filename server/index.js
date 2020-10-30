@@ -10,6 +10,7 @@ authCont = require('./controllers/auth'),
 postCont = require('./controllers/post'),
 profCont = require('./controllers/profile'),
 authMiddle = require('./middleware/auth');
+const path = require('path');
 
 app.use(express.json());
 
@@ -46,6 +47,12 @@ app.get('/api/search/:limit/:offset', postCont.search); //search for all posts
 app.put('/api/follow/:user_id', authMiddle.loggedIn, profCont.follow); //Follow a user
 app.get('/api/profile/:id', profCont.getProfile); //Get profile
 app.get('/api/profile/:id/:type', profCont.getContent) //Get content
+
+//Send react app
+app.use(express.static(__dirname + '/../build'));
+app.get('*', (req,res)=>{
+    res.sendFile(path.join(__dirname,'../build/index.html'));
+});
 
 //Connect to server -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 massive({

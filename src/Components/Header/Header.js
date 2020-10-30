@@ -66,9 +66,9 @@ function Header(props){
                 <Helmet>
                     <script src="https://kit.fontawesome.com/6f23942a28.js" crossorigin="anonymous"></script>
                 </Helmet>
-                <span id='title'>
+                <Link to='/' id='title'>
                     Litter
-                </span>
+                </Link>
                 <i id='hamburger' className='fa fa-bars' onClick={e=>setMM(!mm)}></i>
                 {links}
             </header>

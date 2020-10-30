@@ -1,0 +1,24 @@
+@import '../../App';
+#home-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    #home-header{
+        width: 80%;
+        max-width: $post-width;
+        @include border;
+        margin-top: 30px;
+        h1{
+            padding: 10px 0px 0px 20px;
+            font-size: 40px;
+            color: $green;
+        }
+        p{
+            @extend %default-text;
+            padding: 20px;
+            padding-top: 0px;
+            font-size: 1.3em;
+        }
+    }
+}

@@ -13,9 +13,11 @@
     justify-content: space-around;
     align-items: center;
     #title{
+        @extend %default-text;
         font-family: Work Sans, sans-serif;
         font-size: 41px;
         font-variant: small-caps;
+        text-decoration: none;
     }
     #hamburger{
         display: none;

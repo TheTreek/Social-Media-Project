@@ -33,7 +33,7 @@ const Post = (props)=>{
             source.cancel('Operation canceled by user.');
             isMounted = false;
         }
-        },[props.num,props.refresh, props.id]);
+        },[props.num,props.refresh,props.id]);
 
     let date = moment(data.date);
     date.subtract(6,'hours');
@@ -41,6 +41,7 @@ const Post = (props)=>{
     const formattedDate = date.format('MM/DD/YYYY h:mm a')
     
     const like = (e)=>{
+        e.stopPropagation();
         e.preventDefault();
         setData({...data, liked: !data.liked});
         axios.get(`/api/like/${data.post_id}`)
@@ -98,6 +99,7 @@ const Post = (props)=>{
 
     const follow = (e)=>{
         e.preventDefault();
+        e.stopPropagation();
         axios.put(`/api/follow/${data.id}`)
             .then(res=>{
                 setData({...data, following: res.data.count});
@@ -127,7 +129,7 @@ const Post = (props)=>{
                 {title}
             </Helmet>
             <span className='post-header'>
-                <Link to={`/profile/${data.id}`} className='post-link'>
+                <Link to={`/profile/${data.id}`} className='post-link' onClick={e=>e.stopPropagation()}>
                     <span className='post-profile'>
                         <img src={data.profile_pic} alt={`Profile of ${data.user_name}`}/>
                         <span className='post-username'>{data.user_name}</span>
