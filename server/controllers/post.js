@@ -122,7 +122,7 @@ module.exports = {
         const user_id = req.session.user.id;
         let {comment} = req.body;
         if(comment.length > 125)
-            comment = comment.substring(0,250);
+            comment = comment.substring(0,125);
         
         await db.post_comment({post_id,user_id,comment});
         return res.sendStatus(200);

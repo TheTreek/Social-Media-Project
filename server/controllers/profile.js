@@ -27,5 +27,18 @@ module.exports = {
         
         const data = await func({id});
         return res.status(200).send(data);
+    },
+    update: async(req,res)=>{
+        const {id} = req.params;
+        let {first_name, last_name, bio} = req.body;
+        if(req.session.user.id+'' !== id)
+            return res.status(401).send('You cannot edit other people\'s profiles');
+        if(!first_name || !last_name)
+            return res.status(400).send('First name or last name is empty');
+        if(bio.length > 250)
+            bio = bio.substring(0,250);
+        const db = req.app.get('db');
+        await db.update_profile({id,first_name,last_name,bio});
+        return (res.sendStatus(200));
     }
 }

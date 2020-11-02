@@ -71,6 +71,77 @@
                     }
                 }
             }
+            
+        }
+    }
+    #profile-form{
+        width: 80%;
+        max-width: $post-width;
+        box-sizing: border-box;
+        @include border;
+        margin-top: 40px;
+        padding: 10px;
+        @extend %default-text;
+        form{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            span{
+                display: flex;
+                flex-direction: column;
+                font-weight: 600;
+                box-sizing: border-box;
+                input{
+                    @include border;
+                    background-color: white;
+                    @extend %default-text;
+                    padding: 5px;
+                }
+            }
+            .small-inp{
+                width: 50%;
+                min-width: 185px;
+                padding: 10px; 
+            }
+            #form-bio{
+                width: 100%;
+                padding: 10px;
+                textarea{
+                    resize: none;
+                    @include border;
+                    background-color: white;
+                    @extend %default-text;
+                    height: 80px;
+                    padding: 5px;
+                }
+                #bio-footer{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    box-sizing: border-box;
+                    justify-content: flex-end;
+                    padding: 5px 0px 0px 20px;
+                    #button{
+                        width: 85px;
+                        font-weight: 600;
+                        text-align: center;
+                        cursor: pointer;
+                    }
+                    #cancel{
+                        width: 85px;
+                        font-weight: 600;
+                        text-align: center;
+                        cursor: pointer;
+                        @include border;
+                        background-color: white;
+                        padding: 5px;
+                        margin-left: 5px;
+                    }
+                    #form-count{
+                        padding-right: 10px;
+                    }
+                }
+            }
         }
     }
     #profile-menu{
@@ -140,6 +211,11 @@
                 padding: 10px;
             }
         }
+        #profile-form{
+            width: 90%;
+            margin-top: 20px;
+            padding: 5px;
+        }
         #profile-menu{
             width: 90%;
         }
@@ -154,7 +230,25 @@
     }
 }
 
+#edit-cont{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    button{
+        @include border;
+        background-color: white;
+        padding: 5px;
+        margin-top: 10px;
+        @extend %default-text;
+        cursor: pointer;
+        font-weight: 600;
+    }
+}
+
 @media (max-width: $mobile){
+    #edit-cont{
+        justify-content: center;
+    }
     #profile-container{
         #profile-header{
             width: 95%;
@@ -164,6 +258,10 @@
                 align-items: center;
                 border: none;
             }
+        }
+        #profile-form{
+            width: 95%;
+            margin-top: 10px;
         }
         #header-info{
             #full-name{

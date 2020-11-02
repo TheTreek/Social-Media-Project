@@ -47,7 +47,8 @@ app.get('/api/search/:limit/:offset', postCont.search); //search for all posts
 //Profile
 app.put('/api/follow/:user_id', authMiddle.loggedIn, profCont.follow); //Follow a user
 app.get('/api/profile/:id', profCont.getProfile); //Get profile
-app.get('/api/profile/:id/:type', profCont.getContent) //Get content
+app.get('/api/profile/:id/:type', profCont.getContent); //Get content
+app.put('/api/profile/:id', authMiddle.loggedIn, profCont.update); //Update profile
 
 //Send react app
 app.use(express.static(__dirname + '/../build'));
