@@ -51,10 +51,14 @@
                 font-size: 25px;
             }
             #header-bio{
+                width: 100%;
+                box-sizing: border-box;
                 p{
                     min-height: 123px;
                     padding: 10px 0px;
                     box-sizing: border-box;
+                    width: 100%;
+                    word-break: break-word;
                 }
             }
             #header-stats{
