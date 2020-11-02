@@ -97,10 +97,6 @@ function Profile(props){
         </div>
     );
 
-    console.log(props);
-    console.log(props.match.params.id);
-    console.log(props.match.params.id+'' === props.id+'');
-
     const editProfile = (
         <div id='edit-cont'>
             <button onClick={e=>setEdit(!edit)}>Edit Profile</button>
