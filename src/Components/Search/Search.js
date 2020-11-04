@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Post from '../Post/Post';
 import './Search.css';
+import { Helmet } from 'react-helmet-async';
 
 const Search = (props)=>{
     const [posts, setPosts] = useState([]);
@@ -67,6 +68,9 @@ const Search = (props)=>{
 
     return (
         <div id='search-container'>
+            <Helmet>
+                <title>Litter | Search</title>
+            </Helmet>
             <div id='posts-flex'>
                 <form id='search-bar' onSubmit={search}>
                     <input type='text' value={decodeURIComponent(decodeURI(searchText))} onChange={e=>setSearch(encodeURI(encodeURIComponent(e.target.value)))} id='search-input' placeholder='Search...'/>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Post from '../Post/Post';
 import Comment from '../Comment/Comment';
+import { Helmet } from 'react-helmet-async';
 
 function Profile(props){
     const [selected, setSelected] = useState('posts')
@@ -134,6 +135,9 @@ function Profile(props){
 
     return (
         <div id='profile-container'>
+            <Helmet>
+                <title>Litter | {profile.user_name}</title>
+            </Helmet>
             {edit ? formJSX : profileHeader}
             <div id='profile-menu'>
                 {selected === 'posts' ? 
